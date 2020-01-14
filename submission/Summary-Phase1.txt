@@ -1,0 +1,236 @@
+Phase 1 model summary
+This document is meant to be a summary of the models used on the Phase 1 data.
+Provide the following details for EACH sub-challenge within “Summary-Phase1.txt”
+------------------------------
+Summary-Phase1-Sub-challenge-1
+------------------------------
+a) Provide a description of model settings and parameters, and details of model building including dataset(s) description(s) used for training, cross validation and testing (number of samples, number of features, etc.)
+
+All 377 samples provided by subchallenge 1 are used to build the following models in our solution.
+
+1. Feature selection. We used the multi-step adaptive SCAD-net method proposed in Xiao and Xu (2015) <DOI:10.1080/00949655.2015.1016944> implemented by the R package msaenet (https://cran.r-project.org/package=msaenet). The method builds a regularized linear model with multi-step estimation and can select a core set of high-confidence variables from the gene expression data. Key parameters include:
+
+- initialization method: ridge regression
+- gamma: 3.7
+- alpha: from 0.1 to 0.9 by 0.1
+- parameter tuning for each step: cross-validation
+- number of cross-validation folds: 5
+- maximum number of steps: 20
+- optimal step selection criterion = Extended BIC
+
+2. Stability selection. We repeatedly built the above model for 100 times with different random seeds (different data splits), aggregate the selection results of all models, count the frequency of the selected features, rank them, and only keep the features that are selected more than average degrees of freedom of the 100 models. This is similar to the idea of "Stability Selection" proposed in Meinshausen and Bühlmann (2010). We selected the top 16 (gene expression) features in this step.
+
+3. Parameter tuning for predictive modeling. We used grid search and 5-fold cross-validation to find the optimal set of parameters for three implementations of the gradient boosting decision tree (GBDT) models: xgboost (Chen and Guestrin, 2016), lightgbm (Ke et al., 2017), and catboost (Prokhorenkova et al., 2018). The parameter grid is:
+
+- xgboost
+  - nrounds = 10, 50, 100, 200, 500, 1000
+  - max_depth = 2, 3, 4, 5
+  - learning_rate = 0.001, 0.01, 0.02, 0.05, 0.1
+- lightgbm
+  - num_iterations = 10, 50, 100, 200, 500, 1000
+  - max_depth = 2, 3, 4, 5
+  - learning_rate = 0.001, 0.01, 0.02, 0.05, 0.1
+- catboost
+  - iterations = 10, 50, 100, 200, 500, 1000
+  - depth = 2, 3, 4, 5
+
+All 4 clinical phenotype features are concatenated with the 16 gene expression features to train the models in this step.
+
+4. Predictive modeling. With the optimal set of parameters from the last step as input for the boosted tree models, we first implemented a two-layer model stacking algorithm (Wolpert, 1992). The first layer ensembles the boosted tree models built by xgboost, lightgbm, and catboost. The second layer is a logistic regression that automatically decides the weight of the predictions from the first layer of models. We compared the performance between the stacked tree model, single xgboost model, single lightgbm model, and single catboost model. We decided to use the stacked tree model for this subchallenge.
+
+All 4 clinical phenotype features are concatenated with the 16 gene expression features to train the models in this step.
+
+b) Short listed features selected by the model
+
+Selected gene expression features:
+
+CAPN14, COX8C, FILIP1, IQCF5, LACTB2.AS1, LINC01537, SLC13A1, ZNF407, C1QTNF7, LINC00635, LINC00691, PPP4R3C, NXNL2, FARSB, RGS13, CPXCR1
+
+Clinical phenotype features used to build the predictive model with the selected gene expression features:
+
+SEX, RACE, WHO_GRADING, CANCER_TYPE
+
+c) Link to complete code in a public GitHub repository
+
+https://github.com/nanxstats/bcpm-msaenet
+
+d) Confusion matrix indicating number of predictions, true positives, false positives, true negatives, and false negatives
+
+This is the confusion matrix of the prediction results of the final predictive model on the entire training set.
+
+Confusion Matrix
+      0   1
+  0  51   0
+  1   0 326
+
+e) Overall accuracy
+
+1.0000
+
+f) Specificity
+
+1.0000
+
+g) Sensitivity
+
+1.0000
+
+h) Area under the curve (AUC)
+
+1.0000
+
+------------------------------
+Summary-Phase1-Sub-challenge-2
+------------------------------
+a) Provide a description of model settings and parameters, and details of model building including dataset(s) description(s) used for training, cross validation and testing (number of samples, number of features, etc.)
+
+All 174 samples provided by subchallenge 2 are used to build the following models in our solution.
+
+1. Feature selection. We used the multi-step adaptive SCAD-net method proposed in Xiao and Xu (2015) <DOI:10.1080/00949655.2015.1016944> implemented by the R package msaenet (https://cran.r-project.org/package=msaenet). The method builds a regularized linear model with multi-step estimation and can select a core set of high-confidence variables from the CNV data. Key parameters include:
+
+- initialization method: ridge regression
+- gamma: 2.01, 2.5, 3, 3.5, 3.7
+- alpha: from 0.05 to 0.95 by 0.05
+- parameter tuning for each step: cross-validation
+- number of cross-validation folds: 5
+- maximum number of steps: 20
+- optimal step selection criterion = Extended BIC
+
+2. Stability selection. We repeatedly built the above model for 100 times with different random seeds (different data splits), aggregate the selection results of all models, count the frequency of the selected features, rank them, and only keep the features that are selected more than average degrees of freedom of the 100 models. This is similar to the idea of "Stability Selection" proposed in Meinshausen and Bühlmann (2010). We selected the top 6 (CNV) features in this step.
+
+3. Parameter tuning for predictive modeling. We used grid search and 5-fold cross-validation to find the optimal set of parameters for three implementations of the gradient boosting decision tree (GBDT) models: xgboost (Chen and Guestrin, 2016), lightgbm (Ke et al., 2017), and catboost (Prokhorenkova et al., 2018). The parameter grid is:
+
+- xgboost
+  - nrounds = 10, 50, 100, 200, 500, 1000
+  - max_depth = 2, 3, 4, 5
+  - learning_rate = 0.001, 0.01, 0.02, 0.05, 0.1
+- lightgbm
+  - num_iterations = 10, 50, 100, 200, 500, 1000
+  - max_depth = 2, 3, 4, 5
+  - learning_rate = 0.001, 0.01, 0.02, 0.05, 0.1
+- catboost
+  - iterations = 10, 50, 100, 200, 500, 1000
+  - depth = 2, 3, 4, 5
+
+All 4 clinical phenotype features are concatenated with the 6 CNV features to train the models in this step.
+
+4. Predictive modeling. With the optimal set of parameters from the last step as input for the boosted tree models, we first implemented a two-layer model stacking algorithm (Wolpert, 1992). The first layer ensembles the boosted tree models built by xgboost, lightgbm, and catboost. The second layer is a logistic regression that automatically decides the weight of the predictions from the first layer of models. We compared the performance between the stacked tree model, single xgboost model, single lightgbm model, and single catboost model. We decided to use the xgboost model for this subchallenge.
+
+All 4 clinical phenotype features are concatenated with the 6 CNV features to train the models in this step.
+
+b) Short listed features selected by the model
+
+Selected CNV features:
+
+3q13.12, 3p11.1, 9p12, 21q11.1, 17q23.1, 20p11.1
+
+Clinical phenotype features used to build the predictive model with the selected CNV features:
+
+SEX, RACE, WHO_GRADING, CANCER_TYPE
+
+c) Link to complete code in a public GitHub repository
+
+https://github.com/nanxstats/bcpm-msaenet
+
+d) Confusion matrix indicating number of predictions, true positives, false positives, true negatives, and false negatives
+
+This is the confusion matrix of the prediction results of the final predictive model on the entire training set.
+
+Confusion Matrix
+      0   1
+  0  24   7
+  1  19 124
+
+e) Overall accuracy
+
+0.8506
+
+f) Specificity
+
+0.9466
+
+g) Sensitivity
+
+0.5581
+
+h) Area under the curve (AUC)
+
+0.9119
+
+------------------------------
+Summary-Phase1-Sub-challenge-3
+------------------------------
+a) Provide a description of model settings and parameters, and details of model building including dataset(s) description(s) used for training, cross validation and testing (number of samples, number of features, etc.)
+
+All 166 samples provided by subchallenge 3 are used to build the following models in our solution.
+
+1. Feature selection. We used the multi-step adaptive SCAD-net method proposed in Xiao and Xu (2015) <DOI:10.1080/00949655.2015.1016944> implemented by the R package msaenet (https://cran.r-project.org/package=msaenet). The method builds a regularized linear model with multi-step estimation and can select a core set of high-confidence variables from the gene expression + CNV data. Key parameters include:
+
+- initialization method: ridge regression
+- gamma: 3.7
+- alpha: from 0.1 to 0.9 by 0.1
+- parameter tuning for each step: cross-validation
+- number of cross-validation folds: 5
+- maximum number of steps: 20
+- optimal step selection criterion = Extended BIC
+
+2. Stability selection. We repeatedly built the above model for 100 times with different random seeds (different data splits), aggregate the selection results of all models, count the frequency of the selected features, rank them, and only keep the features that are selected more than average degrees of freedom of the 100 models. This is similar to the idea of "Stability Selection" proposed in Meinshausen and Bühlmann (2010). We selected the top 13 features in this step.
+
+3. Parameter tuning for predictive modeling. We used grid search and 5-fold cross-validation to find the optimal set of parameters for three implementations of the gradient boosting decision tree (GBDT) models: xgboost (Chen and Guestrin, 2016), lightgbm (Ke et al., 2017), and catboost (Prokhorenkova et al., 2018). The parameter grid is:
+
+- xgboost
+  - nrounds = 10, 50, 100, 200, 500, 1000
+  - max_depth = 2, 3, 4, 5
+  - learning_rate = 0.001, 0.01, 0.02, 0.05, 0.1
+- lightgbm
+  - num_iterations = 10, 50, 100, 200, 500, 1000
+  - max_depth = 2, 3, 4, 5
+  - learning_rate = 0.001, 0.01, 0.02, 0.05, 0.1
+- catboost
+  - iterations = 10, 50, 100, 200, 500, 1000
+  - depth = 2, 3, 4, 5
+
+All 4 clinical phenotype features are concatenated with the 13 selected features to train the models in this step.
+
+4. Predictive modeling. With the optimal set of parameters from the last step as input for the boosted tree models, we first implemented a two-layer model stacking algorithm (Wolpert, 1992). The first layer ensembles the boosted tree models built by xgboost, lightgbm, and catboost. The second layer is a logistic regression that automatically decides the weight of the predictions from the first layer of models. We compared the performance between the stacked tree model, single xgboost model, single lightgbm model, and single catboost model. We decided to use the lightgbm model for this subchallenge.
+
+All 4 clinical phenotype features are concatenated with the 13 selected features to train the models in this step.
+
+b) Short listed features selected by the model
+
+Selected features:
+
+C17orf77, HELQ, LOC101927870, MAGEB18, TRAV12.3, ADH4, AVPR1A, PDE6C, LINC01854, BRD7P3, LINC01085, CT83, LINC01815
+
+Clinical phenotype features used to build the predictive model with the selected features:
+
+SEX, RACE, WHO_GRADING, CANCER_TYPE
+
+c) Link to complete code in a public GitHub repository
+
+https://github.com/nanxstats/bcpm-msaenet
+
+d) Confusion matrix indicating number of predictions, true positives, false positives, true negatives, and false negatives
+
+This is the confusion matrix of the prediction results of the final predictive model on the entire training set.
+
+Confusion Matrix
+      0   1
+  0  40   0
+  1   0 126
+
+e) Overall accuracy
+
+1.0000
+
+f) Specificity
+
+1.000
+
+g) Sensitivity
+
+1.000
+
+h) Area under the curve (AUC)
+
+1.000
