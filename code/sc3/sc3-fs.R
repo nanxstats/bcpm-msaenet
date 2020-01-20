@@ -2,7 +2,6 @@ library("msaenet")
 library("doParallel")
 registerDoParallel(detectCores())
 
-# consider sample weight? (class imbalance)
 for (i in 1:100) {
   cat("Fitting msasnet model", i, "\n")
   try(sc3_fs_fit <-
