@@ -1,4 +1,4 @@
-# Brain Cancer Predictive Modeling <img src="https://i.imgur.com/annXnMM.png" align="right" alt="logo" height="180" width="180" />
+# Brain Cancer Predictive Modeling <img src="https://i.imgur.com/pDHoFo7.png" align="right" alt="logo" height="180" width="180" />
 
 Solution for the [precisionFDA Brain Cancer Predictive Modeling and Biomarker Discovery Challenge](https://precision.fda.gov/challenges/8) using [msaenet](https://nanx.me/msaenet/).
 
