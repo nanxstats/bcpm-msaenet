@@ -2,7 +2,7 @@ PATIENTID	SURVIVAL_STATUS
 patient_126	0
 patient_140	0
 patient_163	1
-patient_193	1
+patient_193	0
 patient_197	1
 patient_207	1
 patient_210	1
@@ -10,8 +10,8 @@ patient_260	1
 patient_262	1
 patient_269	1
 patient_275	1
-patient_277	1
-patient_281	1
+patient_277	0
+patient_281	0
 patient_288	1
 patient_311	1
 patient_334	1

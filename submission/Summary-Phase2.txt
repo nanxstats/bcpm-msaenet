@@ -10,6 +10,13 @@ The model fitted on the Phase 1 data is applied to Phase 2 data to make predicti
 
 Specifically, the stacked tree model built from Phase 1 described in Summary-Phase1.txt for subchallenge 1 is applied to the same 16 selected gene expression features and 4 clinical phenotype features of the Phase 2 data.
 
+One notable tuning parameter for the prediction is the calibrated decision threshold. The reason is twofold:
+
+1. The raw probability output from the boosting tree models can be overly-conservative.
+2. The probability values produced by the model trained on class-unbalanced data may require calibration.
+
+To solve these potential issues, we used a custom classification threshold (0.9) in this subchallenge to ensure the predicted outcome (class label) distribution match that of the training set as much as possible.
+
 ------------------------------
 Summary-Phase2-Sub-challenge-2
 ------------------------------
@@ -19,6 +26,13 @@ The model fitted on the Phase 1 data is applied to Phase 2 data to make predicti
 
 Specifically, the xgboost model built from Phase 1 described in Summary-Phase1.txt for subchallenge 2 is applied to the same 6 selected CNV features and 4 clinical phenotype features of the Phase 2 data.
 
+One notable tuning parameter for the prediction is the calibrated decision threshold. The reason is twofold:
+
+1. The raw probability output from the boosting tree models can be overly-conservative.
+2. The probability values produced by the model trained on class-unbalanced data may require calibration.
+
+To solve these potential issues, we used a custom classification threshold (0.6) in this subchallenge to ensure the predicted outcome (class label) distribution match that of the training set as much as possible.
+
 ------------------------------
 Summary-Phase2-Sub-challenge-3
 ------------------------------
@@ -27,3 +41,10 @@ Provide information on model settings and parameters used:
 The model fitted on the Phase 1 data is applied to Phase 2 data to make predictions. No special settings or paramaters are used in Phase 2 prediction.
 
 Specifically, the lightgbm model built from Phase 1 described in Summary-Phase1.txt for subchallenge 3 is applied to the same 13 selected features and 4 clinical phenotype features of the Phase 2 data.
+
+One notable tuning parameter for the prediction is the calibrated decision threshold. The reason is twofold:
+
+1. The raw probability output from the boosting tree models can be overly-conservative.
+2. The probability values produced by the model trained on class-unbalanced data may require calibration.
+
+To solve these potential issues, we used a custom classification threshold (0.9) in this subchallenge to ensure the predicted outcome (class label) distribution match that of the training set as much as possible.
