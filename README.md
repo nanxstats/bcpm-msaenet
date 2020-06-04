@@ -1,4 +1,4 @@
-# Brain Cancer Predictive Modeling <img src="https://i.imgur.com/c1hbrLa.png" align="right" alt="" height="180" width="180" />
+# Brain Cancer Predictive Modeling <img src="https://i.imgur.com/f68cMck.png" align="right" alt="" height="180" width="180" />
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 ![License: MIT](https://img.shields.io/github/license/nanxstats/bcpm-msaenet.svg)
