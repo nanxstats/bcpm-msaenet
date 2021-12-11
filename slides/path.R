@@ -1,0 +1,6 @@
+png("path.png", width = 2560, height = 1920, res = 300)
+par(mar = c(1, 4, 1, 1), bg = NA)
+layout(matrix(c(1, 2), 2, 1, byrow = TRUE), heights = c(2, 1))
+plot(sc2_fs_fit, label = TRUE, label.vars = colnames(sc2_x2_train), ylab = "Coefficients")
+plot(sc2_fs_fit, type = "criterion", ylab = "EBIC")
+dev.off()

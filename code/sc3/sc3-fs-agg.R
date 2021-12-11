@@ -35,6 +35,20 @@ plot(1:length(unique(unlist(lst_feature))), sort(table(unlist(lst_feature)), dec
 abline(v = 13.5)
 abline(h = 50)
 
+# # Plot for slides
+# x = seq(20, 100, 20)
+# png("sc3.png", width = 2560, height = 1920, res = 300)
+# par(mar = c(7, 5, 2, 2), bg = NA)
+# plot(
+#   1:length(unique(unlist(lst_feature))), sort(table(unlist(lst_feature)), decreasing = TRUE), type = "b",
+#   xaxt="n",
+#   xlab = "",
+#   ylab = "Selection Frequency")
+# axis(2, at = x, labels = x, las=2)
+# axis(1, at = 1:19, las = 3, labels = colnames(sc3_x2_train)[as.integer(names(sort(table(unlist(lst_feature)), decreasing = TRUE)))])
+# abline(v = 13, col = "darkred", lty = 2, lwd = 1.5)
+# dev.off()
+
 # select the top 13 features
 sc3_fs_idx <- as.integer(names(sort(table(unlist(lst_feature)), decreasing = TRUE)[1:13]))
 

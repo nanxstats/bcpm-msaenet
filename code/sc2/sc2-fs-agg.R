@@ -35,6 +35,19 @@ plot(1:length(unique(unlist(lst_feature))), sort(table(unlist(lst_feature)), dec
 abline(v = 6.5)
 abline(h = 50)
 
+# # Plot for slides
+# x = seq(20, 100, 20)
+# png("sc2.png", width = 2560, height = 1080, res = 300)
+# plot(
+#   1:length(unique(unlist(lst_feature))), sort(table(unlist(lst_feature)), decreasing = TRUE), type = "b",
+#   xaxt="n",
+#   xlab = "Feature",
+#   ylab = "Selection Frequency")
+# axis(2, at = x, labels = x, las=2)
+# axis(1, at = 1:7, labels = colnames(sc2_x2_train)[as.integer(names(sort(table(unlist(lst_feature)), decreasing = TRUE)))])
+# abline(v = 6, col = "darkred", lty = 2, lwd = 1.5)
+# dev.off()
+
 # select the top 6 features
 sc2_fs_idx <- as.integer(names(sort(table(unlist(lst_feature)), decreasing = TRUE)[1:6]))
 
