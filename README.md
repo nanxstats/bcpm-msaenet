@@ -17,6 +17,10 @@ This solution features the following models:
 - A relaxed version of the "Stability Selection" procedure ([Meinshausen and Bühlmann, 2010](https://doi.org/10.1111/j.1467-9868.2010.00740.x)) was used to aggregate the selected features from 100 perturbated models and only keep the consistently selected features.
 - Gradient boosting decision tree (GBDT) models for predictive modeling with the selected genomic features and all four clinical features. The tree models include xgboost ([Chen and Guestrin, 2016](https://doi.org/10.1145/2939672.2939785)), lightgbm ([Ke et al., 2017](https://papers.nips.cc/paper/6907-lightgbm-a-highly-efficient-gradient-boosting-decision)), catboost ([Prokhorenkova et al., 2018](https://papers.nips.cc/paper/7898-catboost-unbiased-boosting-with-categorical-features)), and a two-layer stacking tree model ([Wolpert, 1992](https://doi.org/10.1016/S0893-6080(05)80023-1)). We created an R package [stackgbm](https://github.com/nanxstats/stackgbm) for doing this after the challenge ended.
 
+## Pipeline
+
+![](slides/bcpm-msaenet-flow-transparent.png)
+
 ## Dependencies
 
 Most of the depended R packages are installable from CRAN. Two special ones:
