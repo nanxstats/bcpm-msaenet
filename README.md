@@ -5,7 +5,7 @@
 
 Analysis pipeline for the precisionFDA Brain Cancer Predictive Modeling and Biomarker Discovery [challenge](https://precision.fda.gov/challenges/8) using [msaenet](https://nanx.me/msaenet/).
 
-It is ranked as the [2nd place solution](https://precision.fda.gov/challenges/8/view/results) by predictive performance.
+It was ranked as the [2nd place solution](https://precision.fda.gov/challenges/8/results) by predictive performance.
 
 Team: [Nan Xiao](https://nanx.me/), [Soner Koc](https://github.com/skoc), [Kaushik Ghose](https://kaushikghose.wordpress.com/) from [Seven Bridges](https://www.sevenbridges.com/).
 
