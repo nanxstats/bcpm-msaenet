@@ -21,7 +21,7 @@ This solution features the following models:
 
 ## Pipeline
 
-![](slides/bcpm-msaenet-flow-transparent.png)
+![](slides/bcpm-msaenet-flow.png)
 
 ## Dependencies
 
